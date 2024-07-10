@@ -1,0 +1,17 @@
+services:
+  python:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: syno_movement
+    restart: unless-stopped
+    volumes:
+      - ./src:/src
+    ports:
+      - 9999:9999
+
+  codeproject:
+    container_name: CodeProject.AI
+    restart: unless-stopped
+    ports:
+      - 32168:32168

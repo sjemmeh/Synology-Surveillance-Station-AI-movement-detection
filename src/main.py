@@ -1,0 +1,57 @@
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import urlparse
+
+import notifier
+import image_handler
+import json
+
+SETTINGS = json.load(open("settings.json"))
+class Main(BaseHTTPRequestHandler):
+
+    def log_message(self, format, *args):
+        # Override to suppress logging - don't want to spam terminal.
+        return
+
+    def do_GET(self):
+        # Parse the URL
+        parsed_path = urlparse(self.path)
+
+        # Extract the path
+        path = parsed_path.path
+        # Default message
+        html_header = """<html><head><title>Syno Image parser</title><meta name="viewport" content="width=device-width, 
+        initial-scale=1.0"></head><body>"""
+        html_footer = """</body></html>"""
+        message = html_header + """<p> Nothing to do. </p>""" + html_footer
+
+        # Remove slash from url
+        camera_name = path[1:]
+        if camera_name in SETTINGS["CAMERAS"]:
+            if image_handler.detect(camera_name):
+                message = html_header + f"""<p> Request for {camera_name} successful. Conditions are true </p>""" + html_footer
+                notifier.notify(SETTINGS["NOTIFY_METHOD"], SETTINGS["NOTIFY_DATA"])
+            else:
+                message = html_header + f"""<p> Request for {camera_name} successful. Conditions are false </p>""" + html_footer
+
+        # Send response status code
+        self.send_response(200)
+
+        # Send headers
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+
+        # Write message content
+        self.wfile.write(bytes(message, "utf8"))
+
+        return
+
+
+def run(server_class=HTTPServer, handler_class=Main, port=SETTINGS["SERVER_PORT"]):
+    server_address = ('', port)
+    httpd = server_class(server_address, handler_class)
+    print(f'Starting httpd server on port {port}...')
+    httpd.serve_forever()
+
+
+if __name__ == "__main__":
+    run()

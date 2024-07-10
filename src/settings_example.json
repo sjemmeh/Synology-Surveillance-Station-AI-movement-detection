@@ -1,0 +1,21 @@
+{
+    "SERVER_PORT": 9999,
+
+    "SYNO_IP": "",
+    "SYNO_PORT": "5001",
+    "SYNO_METHOD": "https",
+
+    "account": "",
+    "passwd": "",
+    "session": "SurveillanceStation",
+    "format": "sid",
+
+    "AI_IP": "",
+    "AI_PORT": "32168",
+
+    "look_for": ["cat", "person"],
+    "CAMERAS": [""],
+
+    "NOTIFY_METHOD": "webhook",
+    "NOTIFY_DATA": ""
+}
