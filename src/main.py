@@ -15,7 +15,6 @@ class Main(BaseHTTPRequestHandler):
     def do_GET(self):
         # Parse the URL
         parsed_path = urlparse(self.path)
-
         # Extract the path
         path = parsed_path.path
         # Default message
@@ -29,7 +28,8 @@ class Main(BaseHTTPRequestHandler):
         if camera_name in SETTINGS["CAMERAS"]:
             if image_handler.detect(camera_name):
                 message = html_header + f"""<p> Request for {camera_name} successful. Conditions are true </p>""" + html_footer
-                notifier.notify(SETTINGS["NOTIFY_METHOD"], SETTINGS["NOTIFY_DATA"])
+                for idx, method in enumerate(SETTINGS["NOTIFY_METHODS"]):
+                    notifier.notify(method, SETTINGS["NOTIFY_DATA"][idx], image_handler.last_image_name, camera_name)
             else:
                 message = html_header + f"""<p> Request for {camera_name} successful. Conditions are false </p>""" + html_footer
 

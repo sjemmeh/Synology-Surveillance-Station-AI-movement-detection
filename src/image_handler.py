@@ -2,15 +2,15 @@ import requests
 from datetime import datetime
 import os
 import json
+import time
 
-# Function to read JSON data from a file
 
 SETTINGS = json.load(open("settings.json"))
-today = datetime.now()
-
+last_image_name = ""
 
 def detect(camera_name):
     """Check image for specified object"""
+    time.sleep(SETTINGS["DELAY"])
     image_data = open(get_image(camera_name), "rb").read()
     URL = "http://" + SETTINGS["AI_IP"] + ":" + SETTINGS["AI_PORT"] + "/v1/vision/detection"
     response = requests.post(URL,
@@ -27,8 +27,10 @@ def detect(camera_name):
 
 
 def get_image(camera_name):
+    today = datetime.now()
     """Get image from synology API"""
     camera_id = 0
+    global last_image_name
 
     # Set synology URL
     base_url = SETTINGS["SYNO_METHOD"] + "://" + SETTINGS["SYNO_IP"] + ":" + SETTINGS["SYNO_PORT"] +"/webapi/"
@@ -71,6 +73,7 @@ def get_image(camera_name):
             for chunk in response.iter_content(1024):
                 file.write(chunk)
         print(f"Snapshot saved as {filename}")
+        last_image_name = filename
     else:
         raise Exception("Failed to capture snapshot")
     # Return the file name

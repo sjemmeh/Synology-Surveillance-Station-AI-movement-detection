@@ -13,9 +13,13 @@
     "AI_IP": "",
     "AI_PORT": "32168",
 
-    "look_for": ["cat", "person"],
+    "LOOK_FOR": ["cat", "person"],
     "CAMERAS": [""],
+    "DELAY": 0,
 
-    "NOTIFY_METHOD": "webhook",
-    "NOTIFY_DATA": ""
+    "NOTIFY_METHODS": ["webhook", "telegram"],
+    "NOTIFY_DATA": ["OFF", "OFF"],
+
+    "TELEGRAM_API_KEY": "",
+    "TELEGRAM_CHAT_ID": ""
 }
