@@ -11,7 +11,7 @@
   * Install the requirements
   * Run the main.py file
 
-## Setting up
+## Settings
 |     Setting      |      Default Value      |                                                 Description                                                  |
 |:----------------:|:-----------------------:|:------------------------------------------------------------------------------------------------------------:|
 |     SYNO_IP      |            -            |                                              Synology server IP                                              |
