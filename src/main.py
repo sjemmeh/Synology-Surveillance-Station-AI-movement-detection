@@ -6,6 +6,8 @@ import image_handler
 import json
 
 SETTINGS = json.load(open("settings.json"))
+
+
 class Main(BaseHTTPRequestHandler):
 
     def log_message(self, format, *args):
@@ -15,23 +17,31 @@ class Main(BaseHTTPRequestHandler):
     def do_GET(self):
         # Parse the URL
         parsed_path = urlparse(self.path)
+
         # Extract the path
         path = parsed_path.path
+
         # Default message
         html_header = """<html><head><title>Syno Image parser</title><meta name="viewport" content="width=device-width, 
         initial-scale=1.0"></head><body>"""
         html_footer = """</body></html>"""
-        message = html_header + """<p> Nothing to do. </p>""" + html_footer
+        message = """<p> Nothing to do. </p>"""
+
 
         # Remove slash from url
         camera_name = path[1:]
+
+        # Check if the camera is present in settings
         if camera_name in SETTINGS["CAMERAS"]:
             if image_handler.detect(camera_name):
-                message = html_header + f"""<p> Request for {camera_name} successful. Conditions are true </p>""" + html_footer
+                message = f"""<p> Request for {camera_name} successful. Conditions are true </p>"""
                 for idx, method in enumerate(SETTINGS["NOTIFY_METHODS"]):
                     notifier.notify(method, SETTINGS["NOTIFY_DATA"][idx], image_handler.last_image_name, camera_name)
             else:
-                message = html_header + f"""<p> Request for {camera_name} successful. Conditions are false </p>""" + html_footer
+                message = f"""<p> Request for {camera_name} successful. Conditions are false </p>"""
+
+        # Want to keep it more readable
+        full_message = html_header + message + html_footer
 
         # Send response status code
         self.send_response(200)
@@ -41,7 +51,7 @@ class Main(BaseHTTPRequestHandler):
         self.end_headers()
 
         # Write message content
-        self.wfile.write(bytes(message, "utf8"))
+        self.wfile.write(bytes(full_message, "utf8"))
 
         return
 

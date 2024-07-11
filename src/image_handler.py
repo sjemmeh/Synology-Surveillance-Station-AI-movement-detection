@@ -4,9 +4,9 @@ import os
 import json
 import time
 
-
 SETTINGS = json.load(open("settings.json"))
 last_image_name = ""
+
 
 def detect(camera_name):
     """Check image for specified object"""
@@ -33,7 +33,7 @@ def get_image(camera_name):
     global last_image_name
 
     # Set synology URL
-    base_url = SETTINGS["SYNO_METHOD"] + "://" + SETTINGS["SYNO_IP"] + ":" + SETTINGS["SYNO_PORT"] +"/webapi/"
+    base_url = SETTINGS["SYNO_METHOD"] + "://" + SETTINGS["SYNO_IP"] + ":" + SETTINGS["SYNO_PORT"] + "/webapi/"
     auth_url = base_url + "auth.cgi?api=SYNO.API.Auth&method=Login&version=6"
 
     # Initiate API call
