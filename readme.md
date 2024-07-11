@@ -10,7 +10,6 @@
 
 * Local:
   * Set up a [Codeproject AI server](https://www.codeproject.com)
-  * Edit the settings.json file
   * Install the requirements
   * Run the main.py file
 
