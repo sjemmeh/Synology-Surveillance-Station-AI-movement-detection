@@ -15,4 +15,4 @@ def notify(method, data, image_file, camera_name):
             bot = telepot.Bot(SETTINGS["TELEGRAM_API_KEY"])
             # Send a photo to the Telegram chat
             caption = f'Movement detected on camera "{camera_name}"!'
-            bot.sendPhoto(SETTINGS["TELEGRAM_CHAT_ID"], photo=open(image_file, 'rb'), caption=caption)
+            bot.sendPhoto(data, photo=open(image_file, 'rb'), caption=caption)

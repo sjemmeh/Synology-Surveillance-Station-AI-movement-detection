@@ -27,7 +27,6 @@ class Main(BaseHTTPRequestHandler):
         html_footer = """</body></html>"""
         message = """<p> Nothing to do. </p>"""
 
-
         # Remove slash from url
         camera_name = path[1:]
 
