@@ -1,8 +1,11 @@
 # Synology movement AI detection - WIP
 ### I tried multiple solutions, but none were working to my specification, so I decided to just write it myself
 ## Setup:
+* Clone the repo
+* Edit the settings.json file
+
+
 * Docker:
-  * Edit the settings.json file
   * Run the container
 
 * Local:
