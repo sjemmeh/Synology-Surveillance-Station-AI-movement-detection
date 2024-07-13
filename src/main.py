@@ -40,8 +40,6 @@ class Main(BaseHTTPRequestHandler):
                     syno_handler.set_record_thread(SETTINGS["RECORD_TIME"])
             else:
                 message = f"""<p> Request for {camera_name} successful. Conditions are false </p>"""
-                if SETTINGS["RECORD"]:
-                    syno_handler.set_record_thread(SETTINGS["RECORD_TIME"])
 
         # Want to keep it more readable
         full_message = html_header + message + html_footer
