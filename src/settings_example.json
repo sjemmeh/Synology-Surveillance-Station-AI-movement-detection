@@ -2,23 +2,23 @@
     "SERVER_PORT": 9999,
 
     "SYNO_IP": "",
-    "SYNO_PORT": "5001",
-    "SYNO_METHOD": "https",
+    "SYNO_PORT": "5000",
+    "SYNO_METHOD": "http",
 
-    "account": "",
-    "passwd": "",
-    "session": "SurveillanceStation",
-    "format": "sid",
+    "SYNO_ACCOUNT": "",
+    "SYNO_PASSWORD": "",
 
     "AI_IP": "",
     "AI_PORT": "32168",
 
     "LOOK_FOR": ["cat", "person"],
     "CAMERAS": [""],
-    "DELAY": 0,
+    "DELAY": 2,
+    "RECORD": true,
+    "RECORD_TIME": 30,
 
     "NOTIFY_METHODS": ["webhook", "telegram"],
-    "NOTIFY_DATA": ["OFF", "OFF"],
+    "NOTIFY_DATA": ["", ""],
 
     "TELEGRAM_API_KEY": ""
 }

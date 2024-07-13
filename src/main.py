@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 
 import notifier
-import image_handler
+import syno_handler
 import json
 
 SETTINGS = json.load(open("settings.json"))
@@ -32,12 +32,16 @@ class Main(BaseHTTPRequestHandler):
 
         # Check if the camera is present in settings
         if camera_name in SETTINGS["CAMERAS"]:
-            if image_handler.detect(camera_name):
+            if syno_handler.detect(camera_name):
                 message = f"""<p> Request for {camera_name} successful. Conditions are true </p>"""
-                for idx, method in enumerate(SETTINGS["NOTIFY_METHODS"]):
-                    notifier.notify(method, SETTINGS["NOTIFY_DATA"][idx], image_handler.last_image_name, camera_name)
+                for idx, method in enumerate(SETTINGS["NOTIFY_METHODS"]):  # Loop through notifiers
+                    notifier.notify(method, SETTINGS["NOTIFY_DATA"][idx], syno_handler.last_image_name, camera_name)
+                if SETTINGS["RECORD"]:
+                    syno_handler.set_record_thread(SETTINGS["RECORD_TIME"])
             else:
                 message = f"""<p> Request for {camera_name} successful. Conditions are false </p>"""
+                if SETTINGS["RECORD"]:
+                    syno_handler.set_record_thread(SETTINGS["RECORD_TIME"])
 
         # Want to keep it more readable
         full_message = html_header + message + html_footer

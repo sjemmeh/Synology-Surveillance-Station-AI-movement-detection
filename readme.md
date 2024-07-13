@@ -16,16 +16,19 @@
 ## Settings
 |     Setting      |      Default Value      |                                                 Description                                                  |
 |:----------------:|:-----------------------:|:------------------------------------------------------------------------------------------------------------:|
+|   SERVER_PORT    |          9999           |                                       HTTP port the server will run on                                       |
 |     SYNO_IP      |            -            |                                              Synology server IP                                              |
 |    SYNO_PORT     |          5001           |                                             Synology server port                                             |
 |   SYNO_METHOD    |          HTTPS          |                                            Synology server method                                            |
-|     account      |            -            |                                                Synology user                                                 |
-|      passwd      |            -            |                                              Synology Password                                               |
+|   SYNO_ACCOUNT   |            -            |                                                Synology user                                                 |
+|  SYNO_PASSWORD   |            -            |                                              Synology Password                                               |
 |      AI_IP       |            -            |                                           CodeProject AI Server IP                                           |
 |     AI_PORT      |          32168          |                                          CodeProject AI Server Port                                          |
 |     LOOK_FOR     |    ["cat", "person"]    | What to look for - [Supported objects](https://www.codeproject.com/AI/docs/api/api_reference.html#detection) | 
-|     CAMERAS      |          [""]           |                              Camera names in the Synology Surveillance station                               |
-|      DELAY       |            0            |                      Set a delay in case surveillance station sends a webhook too fast                       | 
+|     CAMERAS      |            -            |                              Camera names in the Synology Surveillance station                               |
+|      DELAY       |            0            |                      Set a delay in case surveillance station sends a webhook too fast                       |
+|      RECORD      |          True           |                             Calls a record on the synology surveillance station                              |
+|   RECORD_TIME    |           30            |                         Amount of seconds you want to record after detecting motion                          | 
 |  NOTIFY_METHODS  | ["webhook", "telegram"] |                                         Currently supported methods                                          |
 |   NOTIFY_DATA    |     ["OFF", "OFF"]      |                         In case of webhook: webhook full url. For telegram chat ID.                          |
 | TELEGRAM_API_KEY |            -            |                                               Telegram API key                                               | 
@@ -35,7 +38,7 @@
 
 If you want to add multiple telegram/webhook notifiers, you can add them to the lists:
 ```json
-    "NOTIFY_METHODS": ["webhook", "telegram", "webhook"],
+    "NOTIFY_METHODS": ["webhook", "telegram"],
     "NOTIFY_DATA": ["URL", "00000", "URL"]
 ```
 Add a list item to NOTIFY_METHODS, and then add the url/chat id to the NOTIFY_DATA list. It will loop through these.
