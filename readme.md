@@ -38,7 +38,7 @@
 
 If you want to add multiple telegram/webhook notifiers, you can add them to the lists:
 ```json
-    "NOTIFY_METHODS": ["webhook", "telegram"],
+    "NOTIFY_METHODS": ["webhook", "telegram", "webhook"],
     "NOTIFY_DATA": ["URL", "00000", "URL"]
 ```
 Add a list item to NOTIFY_METHODS, and then add the url/chat id to the NOTIFY_DATA list. It will loop through these.
