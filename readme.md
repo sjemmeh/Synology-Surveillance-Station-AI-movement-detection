@@ -29,7 +29,7 @@
 |      DELAY       |            0            |                      Set a delay in case surveillance station sends a webhook too fast                       |
 |      RECORD      |          True           |                             Calls a record on the synology surveillance station                              |
 |   RECORD_TIME    |           30            |                         Amount of seconds you want to record after detecting motion                          | 
-|  NOTIFY_METHODS  | ["webhook", "telegram"] |                                         Currently supported methods                                          |
+|  NOTIFY_METHODS  | ["webhook", "telegram"] |                                Currently supported methods: Webhook/Telegram                                 |
 |   NOTIFY_DATA    |     ["OFF", "OFF"]      |                         In case of webhook: webhook full url. For telegram chat ID.                          |
 | TELEGRAM_API_KEY |            -            |                                               Telegram API key                                               | 
 
