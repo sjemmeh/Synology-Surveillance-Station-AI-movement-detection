@@ -67,6 +67,7 @@ def detect(camera_name):
         if item in SETTINGS["LOOK_FOR"]:
             return True
     else:
+        os.remove(last_image_name)
         return False
 
 
