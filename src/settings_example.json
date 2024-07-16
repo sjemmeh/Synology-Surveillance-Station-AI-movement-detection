@@ -19,6 +19,7 @@
 
     "NOTIFY_METHODS": ["webhook", "telegram"],
     "NOTIFY_DATA": ["", ""],
+    "NOTIFY_CAMERAS": [[""], [""]],
 
     "TELEGRAM_API_KEY": ""
 }

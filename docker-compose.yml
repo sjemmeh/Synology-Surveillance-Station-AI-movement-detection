@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     container_name: syno_movement
     restart: unless-stopped
+    environment:
+      - TZ=Europe/Amsterdam
     volumes:
       - ./src:/src
     ports:

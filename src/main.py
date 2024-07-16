@@ -35,9 +35,10 @@ class Main(BaseHTTPRequestHandler):
             if syno_handler.detect(camera_name):
                 message = f"""<p> Request for {camera_name} successful. Conditions are true </p>"""
                 for idx, method in enumerate(SETTINGS["NOTIFY_METHODS"]):  # Loop through notifiers
-                    notifier.notify(method, SETTINGS["NOTIFY_DATA"][idx], syno_handler.last_image_name, camera_name)
+                    if camera_name in SETTINGS["NOTIFY_CAMERAS"][idx]: # Check if we want to notify for camera name
+                        notifier.notify(method, SETTINGS["NOTIFY_DATA"][idx], syno_handler.last_image_name, camera_name)
                 if SETTINGS["RECORD"]:
-                    syno_handler.set_record_thread(SETTINGS["RECORD_TIME"])
+                    syno_handler.set_record_thread(SETTINGS["RECORD_TIME"], camera_name)
             else:
                 message = f"""<p> Request for {camera_name} successful. Conditions are false </p>"""
 
@@ -60,6 +61,8 @@ class Main(BaseHTTPRequestHandler):
 def run(server_class=HTTPServer, handler_class=Main, port=SETTINGS["SERVER_PORT"]):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
+    print(f'Creating synology session')
+    syno_handler.create_syno_session()
     print(f'Starting httpd server on port {port}...')
     httpd.serve_forever()
 
