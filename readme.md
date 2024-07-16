@@ -14,25 +14,25 @@
   * Run the main.py file
 
 ## Settings
-|     Setting      |           Default Value            |                                                 Description                                                  |
-|:----------------:|:----------------------------------:|:------------------------------------------------------------------------------------------------------------:|
-|   SERVER_PORT    |                9999                |                                       HTTP port the server will run on                                       |
-|     SYNO_IP      |                 -                  |                                              Synology server IP                                              |
-|    SYNO_PORT     |                5001                |                                             Synology server port                                             |
-|   SYNO_METHOD    |               HTTPS                |                                            Synology server method                                            |
-|   SYNO_ACCOUNT   |                 -                  |                                                Synology user                                                 |
-|  SYNO_PASSWORD   |                 -                  |                                              Synology Password                                               |
-|      AI_IP       |                 -                  |                                           CodeProject AI Server IP                                           |
-|     AI_PORT      |               32168                |                                          CodeProject AI Server Port                                          |
-|     LOOK_FOR     |         ["cat", "person"]          | What to look for - [Supported objects](https://www.codeproject.com/AI/docs/api/api_reference.html#detection) | 
-|     CAMERAS      |                 -                  |                              Camera names in the Synology Surveillance station                               |
-|      DELAY       |                 0                  |                      Set a delay in case surveillance station sends a webhook too fast                       |
-|      RECORD      |                True                |                             Calls a record on the synology surveillance station                              |
-|   RECORD_TIME    |                 30                 |                         Amount of seconds you want to record after detecting motion                          | 
-|  NOTIFY_METHODS  |      ["webhook", "telegram"]       |                                Currently supported methods: Webhook/Telegram                                 |
-|   NOTIFY_DATA    |           ["OFF", "OFF"]           |                         In case of webhook: webhook full url. For telegram chat ID.                          |
-|  NOTIFY_CAMERAS  | [["Camera_name"], ["Camera_name"]] |                                      Send notify if camera name is true                                      | 
-| TELEGRAM_API_KEY |                 -                  |                                               Telegram API key                                               | 
+|     Setting      |            Default Value            |                                                                 Description                                                                  |
+|:----------------:|:-----------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------:|
+|   SERVER_PORT    |                9999                 |                                                       HTTP port the server will run on                                                       |
+|     SYNO_IP      |                  -                  |                                                              Synology server IP                                                              |
+|    SYNO_PORT     |                5001                 |                                                             Synology server port                                                             |
+|   SYNO_METHOD    |                HTTPS                |                                                            Synology server method                                                            |
+|   SYNO_ACCOUNT   |                  -                  |                                                                Synology user                                                                 |
+|  SYNO_PASSWORD   |                  -                  |                                                              Synology Password                                                               |
+|      AI_IP       |                  -                  |                                                           CodeProject AI Server IP                                                           |
+|     AI_PORT      |                32168                |                                                          CodeProject AI Server Port                                                          |
+|     LOOK_FOR     |          ["cat", "person"]          |                 What to look for - [Supported objects](https://www.codeproject.com/AI/docs/api/api_reference.html#detection)                 | 
+|     CAMERAS      |                  -                  |                                              Camera names in the Synology Surveillance station                                               |
+|      DELAY       |                  0                  |                                      Set a delay in case surveillance station sends a webhook too fast                                       |
+|      RECORD      |                True                 |                                             Calls a record on the synology surveillance station                                              |
+|   RECORD_TIME    |                 30                  |                                         Amount of seconds you want to record after detecting motion                                          | 
+|  NOTIFY_METHODS  |       ["webhook", "telegram"]       |                                                Currently supported methods: Webhook/Telegram                                                 |
+|   NOTIFY_DATA    |           ["OFF", "OFF"]            |                                         In case of webhook: webhook full url. For telegram chat ID.                                          |
+|  NOTIFY_CAMERAS  | [["Camera_name"], ["Camera_name2"]] |   Specify if notification method sends a notification for each camera (webhook will send a notification if "Camera_name" detects movement)   | 
+| TELEGRAM_API_KEY |                  -                  |                                                               Telegram API key                                                               | 
 
 
 
