@@ -12,9 +12,6 @@ class Notifier:
 
     def notify(self, method, data, image_file, camera_name, objects):
         """Handles notifications based on the specified method."""
-        if data == "OFF":
-            return
-
         try:
             objects_str = ', '.join(objects)  # Join the objects into a single string separated by commas
             caption = f'Movement detected at {camera_name}! Found: {objects_str}'

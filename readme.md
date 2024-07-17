@@ -44,3 +44,7 @@ If you want to add multiple telegram/webhook notifiers, you can add them to the 
     "NOTIFY_CAMERAS": [["Example", "Example2"], ["Example"], ["Example3"]],
 ```
 Add a list item to NOTIFY_METHODS, and then add the url/chat id to the NOTIFY_DATA list. It will loop through these.
+
+### Currently working on adding more notifications (sorted by priority):
+* Email
+* Pushbullet
