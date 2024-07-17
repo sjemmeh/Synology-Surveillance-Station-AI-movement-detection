@@ -1,18 +1,21 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 import json
-import notifier
+from notifier import Notifier
 import logging
 from syno_handler import Synology
 
+SETTINGS_FILE = "settings.json"
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Load settings
-with open("settings.json") as settings_file:
-    SETTINGS = json.load(settings_file)
+with open(SETTINGS_FILE) as file:
+    SETTINGS = json.load(file)
 
-synology = Synology()
+synology = Synology(SETTINGS_FILE)
+notifier = Notifier(SETTINGS_FILE)
+
 
 class MainHandler(BaseHTTPRequestHandler):
 
@@ -49,7 +52,6 @@ class MainHandler(BaseHTTPRequestHandler):
                     synology.set_record_thread(SETTINGS["RECORD_TIME"], camera_name)
             else:
                 message = f"<p> Request for {camera_name} successful. Conditions are false </p>"
-
         full_message = html_header + message + html_footer
 
         # Send response

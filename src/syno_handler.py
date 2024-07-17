@@ -8,8 +8,8 @@ import logging
 
 
 class Synology:
-    def __init__(self):
-        with open("settings.json") as settings_file:
+    def __init__(self, input_file):
+        with open(input_file) as settings_file:
             self.SETTINGS = json.load(settings_file)
 
         self.base_url = (
