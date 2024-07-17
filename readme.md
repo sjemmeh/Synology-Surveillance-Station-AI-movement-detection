@@ -1,5 +1,11 @@
-# Synology movement AI detection - WIP
-### I tried multiple solutions, but none were working to my specification, so I decided to just write it myself
+# Synology movement AI detection
+
+### This is my first python project, so bugs may be present. Please let me know of any issues!
+
+This project hosts a local webserver which accepts a get request for a camera name, gets an image from the synology surveillance station API,
+checks the image for specified objects and then sends a notification if an object is found. Can also start a recording for a specified amount of time.
+
+### Tested with surveillance station version: 9.2.0-11289 
 ## Setup:
 * Clone the repo
 * Edit the settings.json file
