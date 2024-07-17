@@ -2,8 +2,8 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 import json
 import notifier
-import syno_handler
 import logging
+from syno_handler import Synology
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -12,6 +12,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 with open("settings.json") as settings_file:
     SETTINGS = json.load(settings_file)
 
+synology = Synology()
 
 class MainHandler(BaseHTTPRequestHandler):
 
@@ -34,18 +35,18 @@ class MainHandler(BaseHTTPRequestHandler):
 
         # Check if the camera is present in settings
         if camera_name in SETTINGS["CAMERAS"]:
-            if syno_handler.detect(camera_name):
+            if synology.detect(camera_name):
                 message = f"<p> Request for {camera_name} successful. Conditions are true </p>"
                 for idx, method in enumerate(SETTINGS["NOTIFY_METHODS"]):
                     if camera_name in SETTINGS["NOTIFY_CAMERAS"][idx]:
                         notifier.notify(
                             method,
                             SETTINGS["NOTIFY_DATA"][idx],
-                            syno_handler.last_image_name,
-                            camera_name, syno_handler.filtered_objects,
+                            synology.last_image_name,
+                            camera_name, synology.filtered_objects,
                         )
                 if SETTINGS["RECORD"]:
-                    syno_handler.set_record_thread(SETTINGS["RECORD_TIME"], camera_name)
+                    synology.set_record_thread(SETTINGS["RECORD_TIME"], camera_name)
             else:
                 message = f"<p> Request for {camera_name} successful. Conditions are false </p>"
 
@@ -62,7 +63,7 @@ def run(server_class=HTTPServer, handler_class=MainHandler, port=SETTINGS["SERVE
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     logging.info('Creating synology session')
-    syno_handler.create_syno_session()
+    synology.create_syno_session()
     logging.info(f'Starting HTTP server on port {port}...')
     httpd.serve_forever()
 
