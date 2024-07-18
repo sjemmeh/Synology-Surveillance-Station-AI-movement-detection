@@ -19,7 +19,7 @@ class Synology:
         self.camera_threads = {}
         self.thread_locks = {}
         self.stop_events = {}
-        self.filtered_objects = []
+        self.found_objects = []
 
         self.last_image_name = ""
 
@@ -86,8 +86,9 @@ class Synology:
 
         objects_detected = [detected["label"] for detected in response_data.get("predictions", [])]
 
-        self.filtered_objects.extend(
-            o for o in objects_detected if o not in self.filtered_objects and o in self.SETTINGS["LOOK_FOR"]
+        self.found_objects.clear()
+        self.found_objects.extend(
+            o for o in objects_detected if o not in self.found_objects and o in self.SETTINGS["LOOK_FOR"]
         )
 
         if any(item in self.SETTINGS["LOOK_FOR"] for item in objects_detected):

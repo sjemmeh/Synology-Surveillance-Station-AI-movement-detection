@@ -46,7 +46,7 @@ class MainHandler(BaseHTTPRequestHandler):
                             method,
                             SETTINGS["NOTIFY_DATA"][idx],
                             synology.last_image_name,
-                            camera_name, synology.filtered_objects,
+                            camera_name, synology.found_objects,
                         )
                 if SETTINGS["RECORD"]:
                     synology.set_record_thread(SETTINGS["RECORD_TIME"], camera_name)
